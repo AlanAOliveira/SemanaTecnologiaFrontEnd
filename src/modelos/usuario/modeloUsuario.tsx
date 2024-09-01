@@ -1,29 +1,9 @@
 import { api } from "../../services/api";
+import { InterfaceDadosFormularioCadastro, InterfaceDadosFormularioLogin } from "../../interfaces/interfaceDeRegistros";
+import { InterfaceInformacoesUsuario, InterfaceTokenResponse } from "../../interfaces/interfaceDeUsuario";
 
-interface DadosFormularioCadastro {
-  nome: string;
-  sobrenome: string;
-  email: string;
-  senha: string;
-}
-
-interface DadosFormularioLogin {
-  email: string;
-  senha: string;
-}
-
-interface InformacoesUsuario {
-  nome: string;
-  sobrenome: string;
-  email: string;
-}
-
-interface TokenResponse {
-  token: string;
-}
-
-export class Cliente {
-  async cadastrarNovoUsuario(dadosFormularioCadastro: DadosFormularioCadastro): Promise<boolean> {
+export class ModeloUsuario {
+  async cadastrarNovoUsuario(dadosFormularioCadastro: InterfaceDadosFormularioCadastro): Promise<boolean> {
     try {
       await api.post("/nativeCoffe/usuario", dadosFormularioCadastro);
       return true;
@@ -33,9 +13,9 @@ export class Cliente {
     }
   }
 
-  async realizaLogin(dadosFormularioLogin: DadosFormularioLogin): Promise<TokenResponse | null> {
+  async realizaLogin(dadosFormularioLogin: InterfaceDadosFormularioLogin): Promise<InterfaceTokenResponse | null> {
     try {
-      const response = await api.post<TokenResponse>("/nativeCoffe/login", dadosFormularioLogin);
+      const response = await api.post<InterfaceTokenResponse>("/nativeCoffe/login", dadosFormularioLogin);
       if (!response || !response.data) return null;
       return response.data;
     } catch (error) {
@@ -44,9 +24,9 @@ export class Cliente {
     }
   }
 
-  async pegarInformacoesUsuario(tokenJWT: string): Promise<InformacoesUsuario | null> {
+  async pegarInformacoesUsuario(tokenJWT: InterfaceTokenResponse): Promise<InterfaceInformacoesUsuario | null> {
     try {
-      const response = await api.get<InformacoesUsuario>("/nativeCoffe/usuario", {
+      const response = await api.get<InterfaceInformacoesUsuario>("/nativeCoffe/usuario", {
         headers: {
           Authorization: `Bearer ${tokenJWT}`,
         },
