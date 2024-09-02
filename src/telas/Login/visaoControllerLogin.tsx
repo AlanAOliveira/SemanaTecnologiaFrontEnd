@@ -14,7 +14,7 @@ export const useVisaoControllerLogin = () => {
         const loginBemSucessido = await loginRealizado(credenciais);
 
         if (loginBemSucessido) {
-            navegacao('/registro');
+            navegacao('/telaInicio');
         } else {
             console.error("Login falhou");
         }
