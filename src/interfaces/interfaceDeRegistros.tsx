@@ -6,6 +6,6 @@ export interface InterfaceDadosFormularioCadastro {
 }
 
 export interface InterfaceDadosFormularioLogin {
-    email: string;
-    senha: string;
+    emailUsuario: string;
+    senhaUsuario: string;
 }

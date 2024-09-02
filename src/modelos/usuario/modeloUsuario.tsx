@@ -15,9 +15,11 @@ export class ModeloUsuario {
 
   async realizaLogin(dadosFormularioLogin: InterfaceDadosFormularioLogin): Promise<InterfaceTokenResponse | null> {
     try {
-      const response = await api.post<InterfaceTokenResponse>("/nativeCoffe/login", dadosFormularioLogin);
-      if (!response || !response.data) return null;
-      return response.data;
+      const token = await api.post<InterfaceTokenResponse>("/nativeCoffe/login", dadosFormularioLogin);
+
+      if (!token) return null;
+
+      return token.data;
     } catch (error) {
       console.error("Erro ao realizar login", JSON.stringify(error));
       return null;

@@ -2,7 +2,7 @@ import React from 'react';
 import { EntradaDeTexto } from '../../componentes/EntradaDeTexto/EntradaDeTexto';
 
 export const TelaRegistro: React.FC = () => {
-
+    
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
             <div className="row justify-content-center w-100 mb-5">
