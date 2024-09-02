@@ -8,7 +8,7 @@ export const TelaLogin: React.FC = () => {
         emailUsuario,
         setEmailUsuario,
         senhaUsuario,
-        setSenhaUsuario, } = useVisaoControllerLogin();
+        setSenhaUsuario, vaiParaRegistro} = useVisaoControllerLogin();
 
     const handleRealizaLogin = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -40,7 +40,7 @@ export const TelaLogin: React.FC = () => {
                                 <button type="submit" className="btn btn-success w-100 mt-3" onClick={handleRealizaLogin}>
                                     Entrar
                                 </button>
-                                <div className="d-flex justify-content-center mt-3">
+                                <div className="d-flex justify-content-center mt-3" onClick={vaiParaRegistro}>
                                     <button type="button" className="btn btn-link">
                                         Cadastrar-se
                                     </button>

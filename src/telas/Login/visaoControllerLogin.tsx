@@ -20,11 +20,16 @@ export const useVisaoControllerLogin = () => {
         }
     };
 
+    const vaiParaRegistro = () => {
+        navegacao('/registro');
+    }
+
     return {
         realizaLogin,
         emailUsuario,
         setEmailUsuario,
         senhaUsuario,
         setSenhaUsuario,
+        vaiParaRegistro
     }
 }
