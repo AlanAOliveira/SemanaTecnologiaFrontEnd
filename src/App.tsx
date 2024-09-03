@@ -5,6 +5,8 @@ import { TelaRegistro } from './telas/Registro/Registro';
 import { MaterialDesignProvider } from './contexts/useDesign';
 import { AutenticacaoProvider } from './contexts/useAutenticacao';
 import { TelaInicio } from './telas/Inicio/Inicio';
+import { CadastroDeProduto } from './telas/CadastroDeProduto/CadastroDeProduto';
+import Layout from './componentes/Layout/Layout';
 
 const App: React.FC = () => {
   return (
@@ -14,7 +16,10 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<TelaLogin />} />
             <Route path="/registro" element={<TelaRegistro />} />
-            <Route path='/telaInicio' element={<TelaInicio />} />
+            <Route element={<Layout />}>
+              <Route path='/telaInicio' element={<TelaInicio />} />
+              <Route path='/cadastroDeProduto' element={<CadastroDeProduto />} />
+            </Route>
           </Routes>
         </Router>
       </AutenticacaoProvider>
