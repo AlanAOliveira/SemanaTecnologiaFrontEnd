@@ -18,8 +18,9 @@ export const CardProduto: React.FC<InterfaceProdutos> = (props) => {
                     {props.descricaoProduto}
                 </Card.Text>
                 <div className='d-flex flex-column gap-2'>
-                    <Button variant="primary">{precoFormatado}</Button>
-                    <Button variant="primary">Editar</Button>
+                    <p className='fw-bold text-center h4'>{precoFormatado}</p>
+                    <Button variant="primary">Ver produto</Button>
+                    <Button variant="danger">Deletar</Button>
                 </div>
             </Card.Body>
         </Card>
