@@ -3,25 +3,13 @@ import { useAutenticacao } from "../../contexts/useAutenticacao";
 import { InterfaceProdutos } from "../../interfaces/interfaceDeProdutos";
 import { InterfaceTokenResponse } from "../../interfaces/interfaceDeUsuario";
 import { visaoModeloProduto } from "../../modelos/produto/visaoModeloProduto";
+import { useEstaNaTela } from "../../hook/useEstaNaTela";
 
 export const useVisaoControllerInicio = () => {
     const [produtosCadastrados, setProdutosCadastrados] = useState<InterfaceProdutos[] | false>([]);
-    const [isFocused, setIsFocused] = useState(true);
     const { tokenJWT } = useAutenticacao();
+    const estaNaTela = useEstaNaTela();
     const objVisaoModeloProdutos = new visaoModeloProduto();
-
-    useEffect(() => {
-        const handleFocus = () => setIsFocused(true);
-        const handleBlur = () => setIsFocused(false);
-
-        window.addEventListener("focus", handleFocus);
-        window.addEventListener("blur", handleBlur);
-
-        return () => {
-            window.removeEventListener("focus", handleFocus);
-            window.removeEventListener("blur", handleBlur);
-        };
-    }, []);
 
     useEffect(() => {
         const buscaProdutosCadastrados = async (token: InterfaceTokenResponse) => {
@@ -34,9 +22,17 @@ export const useVisaoControllerInicio = () => {
         if (tokenJWT) {
             buscaProdutosCadastrados(tokenJWT);
         }
-    }, [isFocused]);
+    }, [produtosCadastrados, estaNaTela]);
+
+    const deletarProduto = async (id: number) => {
+        if (tokenJWT) {
+            await objVisaoModeloProdutos.deletarProduto(tokenJWT, id);
+
+        };
+    }
 
     return {
-        produtosCadastrados
+        produtosCadastrados,
+        deletarProduto
     };
 };

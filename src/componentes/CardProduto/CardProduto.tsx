@@ -2,7 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { InterfaceProdutos } from "../../interfaces/interfaceDeProdutos";
 
-export const CardProduto: React.FC<InterfaceProdutos> = (props) => {
+interface InterfaceProdutoAcoes extends InterfaceProdutos {
+    acaoDeletar: (id: number) => void;
+}
+
+export const CardProduto: React.FC<InterfaceProdutoAcoes> = (props) => {
     const precoFormatado = `R$ ${props.precoProduto.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
     return (
@@ -20,7 +24,7 @@ export const CardProduto: React.FC<InterfaceProdutos> = (props) => {
                 <div className='d-flex flex-column gap-2'>
                     <p className='fw-bold text-center h4'>{precoFormatado}</p>
                     <Button variant="primary">Ver produto</Button>
-                    <Button variant="danger">Deletar</Button>
+                    <Button variant="danger" onClick={() => { if (props.chavePrimaria_idProduto) { props.acaoDeletar(props.chavePrimaria_idProduto) } }}>Deletar</Button>
                 </div>
             </Card.Body>
         </Card>
