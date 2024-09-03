@@ -25,7 +25,7 @@ export class visaoModeloProduto {
         return this.produto.listarProdutoPeloID(tokenJWT, idProduto);
     }
 
-    async listarProdutos(tokenJWT: InterfaceTokenResponse, tipoProduto: string): Promise<InterfaceProdutos[] | false> {
+    async listarProdutos(tokenJWT: InterfaceTokenResponse, tipoProduto?: string): Promise<InterfaceProdutos[] | false> {
         return this.produto.listarProduto(tokenJWT, tipoProduto);
     }
 }

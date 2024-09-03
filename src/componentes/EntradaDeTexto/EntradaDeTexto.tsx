@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface EntradaDeTextoProps {
+interface entradaDeTextoProps {
     valor?: string;
     mudancaDeValor?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     tipoDeTexto: string;
@@ -8,7 +8,7 @@ interface EntradaDeTextoProps {
     estilos: string;
 }
 
-export const EntradaDeTexto: React.FC<EntradaDeTextoProps> = (props) => {
+export const EntradaDeTexto: React.FC<entradaDeTextoProps> = (props) => {
     return (
         <>
             <div>
