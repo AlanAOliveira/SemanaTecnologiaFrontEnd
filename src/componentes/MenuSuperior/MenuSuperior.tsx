@@ -16,8 +16,8 @@ export const MenuSuperior: React.FC = () => {
                     <Nav className="ms-auto">
                         <Nav.Link href="" style={{ color: TEMA.paletaCores.corFontePrimaria }}>Inicio.</Nav.Link>
                         <Nav.Link as={Link} to="/cadastroDeProduto" style={{ color: TEMA.paletaCores.corFontePrimaria }}>Cadastros.</Nav.Link>
-                        <Nav.Link href="" style={{ color: TEMA.paletaCores.corFontePrimaria }}>Cafés.</Nav.Link>
-                        <Nav.Link href="" style={{ color: TEMA.paletaCores.corFontePrimaria }}>Aperitivos.</Nav.Link>
+                        <Nav.Link as={Link} to="/cafesCadastrados" style={{ color: TEMA.paletaCores.corFontePrimaria }}>Cafés.</Nav.Link>
+                        <Nav.Link as={Link} to="/aperitivosCadastrados" style={{ color: TEMA.paletaCores.corFontePrimaria }}>Aperitivos.</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

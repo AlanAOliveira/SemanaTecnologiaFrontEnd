@@ -1,5 +1,4 @@
 import React from 'react';
-import { MenuSuperior } from '../../componentes/MenuSuperior/MenuSuperior';
 import { useVisaoControllerInicio } from "./visaoControllerInicio";
 import { CardProduto } from '../../componentes/CardProduto/CardProduto';
 import Col from 'react-bootstrap/Col';
@@ -10,7 +9,6 @@ export const TelaInicio: React.FC = () => {
 
     return (
         <main>
-            <MenuSuperior />
             <div className="container-fluid">
                 <Row xs={1} sm={2} md={3} className="g-3 p-4 align-center">
                     {produtosCadastrados && produtosCadastrados.length > 0 ? (
