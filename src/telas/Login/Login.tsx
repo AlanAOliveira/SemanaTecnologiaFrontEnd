@@ -9,7 +9,7 @@ export const TelaLogin: React.FC = () => {
         errors,
         handleSubmit,
         realizaLogin,
-        vaiParaRegistro
+        vaiParaRegistro, paletaCores
     } = useVisaoControllerLogin();
 
     return (
@@ -17,8 +17,8 @@ export const TelaLogin: React.FC = () => {
             <div className="row justify-content-center w-100 mb-5">
                 <div className="col-md-6">
                     <div className="card">
-                        <div className="card-body">
-                            <h1 className="card-title text-center">Bem-vindo.</h1>
+                        <div className="card-body" style={{borderColor: paletaCores.marromPrimario}}>
+                            <h1 className="card-title text-center" style={{color: paletaCores.marromTerciario}}>Bem-vindo.</h1>
                             <form onSubmit={handleSubmit(realizaLogin)}>
                                 <Controller
                                     name="emailUsuario"
@@ -58,11 +58,11 @@ export const TelaLogin: React.FC = () => {
                                 />
                                 {errors.senhaUsuario && <p>{errors.senhaUsuario.message}</p>}
 
-                                <button type="submit" className="btn btn-success w-100 mt-3">
+                                <button type="submit" className="btn w-100 mt-3" style={{ backgroundColor: paletaCores.marromTerciario, color: paletaCores.corFontePrimaria }}>
                                     Entrar
                                 </button>
                                 <div className="d-flex justify-content-center mt-3" onClick={vaiParaRegistro}>
-                                    <button type="button" className="btn btn-link">
+                                    <button type="button" className="btn btn-link" style={{color: paletaCores.marromTerciario}}>
                                         Cadastrar-se
                                     </button>
                                 </div>

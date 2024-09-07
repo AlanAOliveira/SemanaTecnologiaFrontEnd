@@ -2,12 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { useAutenticacao } from "../../contexts/useAutenticacao";
 import { InterfaceDadosFormularioLogin } from "../../interfaces/interfaceDeRegistros";
 import { useForm } from "react-hook-form";
+import { useDesign } from "../../contexts/useDesign";
 
 export const useVisaoControllerLogin = () => {
     const { control, handleSubmit, formState: { errors } } = useForm<InterfaceDadosFormularioLogin>();
-
-    const navegacao = useNavigate();
     const { loginRealizado } = useAutenticacao();
+    const { paletaCores } = useDesign();
+    const navegacao = useNavigate();
 
     const realizaLogin = async (credenciais: InterfaceDadosFormularioLogin) => {
         const loginBemSucessido = await loginRealizado(credenciais);
@@ -28,6 +29,7 @@ export const useVisaoControllerLogin = () => {
         vaiParaRegistro,
         control,
         handleSubmit,
-        errors
+        errors,
+        paletaCores
     }
 }

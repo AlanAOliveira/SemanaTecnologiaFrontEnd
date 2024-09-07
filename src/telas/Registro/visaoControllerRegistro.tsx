@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { InterfaceDadosFormularioCadastro } from "../../interfaces/interfaceDeRegistros";
 import { visaoModeloUsuario } from "../../modelos/usuario/visaoModeloUsuario";
 import { useForm } from "react-hook-form";
+import { useDesign } from "../../contexts/useDesign";
 
 export const useVisaoControllerRegistro = () => {
     const { control, handleSubmit, formState: { errors } } = useForm<InterfaceDadosFormularioCadastro>();
-
+    const { paletaCores } = useDesign();
     const objVisaoModeloUsuario = new visaoModeloUsuario();
 
     const navegacao = useNavigate();
@@ -21,6 +22,7 @@ export const useVisaoControllerRegistro = () => {
 
     return {
         realizaCadastro,
-        control, handleSubmit, errors
+        control, handleSubmit, errors, 
+        paletaCores
     }
 }

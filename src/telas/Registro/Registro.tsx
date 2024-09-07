@@ -4,7 +4,7 @@ import { useVisaoControllerRegistro } from './visaoControllerRegistro';
 import { Controller } from 'react-hook-form';
 
 export const TelaRegistro: React.FC = () => {
-    const { control, errors, handleSubmit, realizaCadastro } = useVisaoControllerRegistro();
+    const { control, errors, handleSubmit, realizaCadastro, paletaCores } = useVisaoControllerRegistro();
 
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
@@ -12,7 +12,7 @@ export const TelaRegistro: React.FC = () => {
                 <div className="col-md-6">
                     <div className="card">
                         <div className="card-body">
-                            <h1 className="card-title text-center">Bem-vindo ao Native Coffee.</h1>
+                            <h1 className="card-title text-center" style={{ color: paletaCores.marromTerciario }}>Bem-vindo ao Native Coffee.</h1>
                             <form onSubmit={handleSubmit(realizaCadastro)}>
                                 <Controller
                                     name="nomeUsuario"
@@ -90,7 +90,7 @@ export const TelaRegistro: React.FC = () => {
                                 />
                                 {errors.senhaUsuario && <p>{errors.senhaUsuario.message}</p>}
 
-                                <button type="submit" className="btn btn-success w-100 mt-3">
+                                <button type="submit" className="btn w-100 mt-3" style={{ backgroundColor: paletaCores.marromTerciario, color: paletaCores.corFontePrimaria }}>
                                     Cadastrar!
                                 </button>
                             </form>
