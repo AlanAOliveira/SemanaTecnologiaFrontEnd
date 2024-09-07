@@ -18,7 +18,7 @@ export class ModeloUsuario {
       const token = await api.post<InterfaceTokenResponse>("/nativeCoffe/login", dadosFormularioLogin);
 
       if (!token) return null;
-
+    
       return token.data;
     } catch (error) {
       console.error("Erro ao realizar login", JSON.stringify(error));

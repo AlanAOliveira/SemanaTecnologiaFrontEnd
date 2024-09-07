@@ -1,13 +1,11 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { InterfaceDadosFormularioCadastro } from "../../interfaces/interfaceDeRegistros";
 import { visaoModeloUsuario } from "../../modelos/usuario/visaoModeloUsuario";
+import { useForm } from "react-hook-form";
 
 export const useVisaoControllerRegistro = () => {
-    const [nomeUsuario, setNomeUsuario] = useState<string>('');
-    const [sobrenomeUsuario, setSobrenomeUsuario] = useState<string>('');
-    const [emailUsuario, setEmailUsuario] = useState<string>('');
-    const [senhaUsuario, setSenhaUsuario] = useState<string>('');
+    const { control, handleSubmit, formState: { errors } } = useForm<InterfaceDadosFormularioCadastro>();
+
     const objVisaoModeloUsuario = new visaoModeloUsuario();
 
     const navegacao = useNavigate();
@@ -17,19 +15,12 @@ export const useVisaoControllerRegistro = () => {
         if (cadastroRealizado) {
             return navegacao('/');
         } else {
-            console.log("Deu erro no registro.");
+            alert('Dados inválidos. O e-mail já esta em uso.');
         }
     };
 
     return {
         realizaCadastro,
-        nomeUsuario,
-        sobrenomeUsuario,
-        emailUsuario,
-        senhaUsuario,
-        setNomeUsuario,
-        setSobrenomeUsuario,
-        setEmailUsuario,
-        setSenhaUsuario
+        control, handleSubmit, errors
     }
 }

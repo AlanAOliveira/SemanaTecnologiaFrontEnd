@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAutenticacao } from "../../contexts/useAutenticacao";
 import { InterfaceDadosFormularioLogin } from "../../interfaces/interfaceDeRegistros";
+import { useForm } from "react-hook-form";
 
 export const useVisaoControllerLogin = () => {
-    const [emailUsuario, setEmailUsuario] = useState<string>('');
-    const [senhaUsuario, setSenhaUsuario] = useState<string>('');
+    const { control, handleSubmit, formState: { errors } } = useForm<InterfaceDadosFormularioLogin>();
 
     const navegacao = useNavigate();
     const { loginRealizado } = useAutenticacao();
@@ -16,7 +15,7 @@ export const useVisaoControllerLogin = () => {
         if (loginBemSucessido) {
             navegacao('/telaInicio');
         } else {
-            console.error("Login falhou");
+            alert('Credenciais inválidas.');
         }
     };
 
@@ -26,10 +25,9 @@ export const useVisaoControllerLogin = () => {
 
     return {
         realizaLogin,
-        emailUsuario,
-        setEmailUsuario,
-        senhaUsuario,
-        setSenhaUsuario,
-        vaiParaRegistro
+        vaiParaRegistro,
+        control,
+        handleSubmit,
+        errors
     }
 }

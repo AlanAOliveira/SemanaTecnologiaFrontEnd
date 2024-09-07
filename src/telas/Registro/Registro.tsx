@@ -1,20 +1,10 @@
 import React from 'react';
 import { EntradaDeTexto } from '../../componentes/EntradaDeTexto/EntradaDeTexto';
 import { useVisaoControllerRegistro } from './visaoControllerRegistro';
+import { Controller } from 'react-hook-form';
 
 export const TelaRegistro: React.FC = () => {
-    const controllerRegistro = useVisaoControllerRegistro();
-
-    const handleRegistro = async (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-
-        await controllerRegistro.realizaCadastro({
-            nomeUsuario: controllerRegistro.nomeUsuario,
-            sobrenomeUsuario: controllerRegistro.sobrenomeUsuario,
-            emailUsuario: controllerRegistro.emailUsuario,
-            senhaUsuario: controllerRegistro.senhaUsuario
-        });
-    }
+    const { control, errors, handleSubmit, realizaCadastro } = useVisaoControllerRegistro();
 
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
@@ -23,44 +13,84 @@ export const TelaRegistro: React.FC = () => {
                     <div className="card">
                         <div className="card-body">
                             <h1 className="card-title text-center">Bem-vindo ao Native Coffee.</h1>
-                            <form>
-                                <EntradaDeTexto
-                                    label="Informe o seu primeiro nome:"
-                                    id="primeiroNome"
-                                    tipoDeTexto="text"
-                                    textoPlaceholder='Insira o seu primeiro nome:'
-                                    estilos="w-100 my-2 border-0 py-2"
-                                    valor={controllerRegistro.nomeUsuario}
-                                    mudancaDeValor={(e) => controllerRegistro.setNomeUsuario(e.target.value)}
+                            <form onSubmit={handleSubmit(realizaCadastro)}>
+                                <Controller
+                                    name="nomeUsuario"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <EntradaDeTexto
+                                            label="Informe o seu primeiro nome:"
+                                            id="primeiroNome"
+                                            tipoDeTexto="text"
+                                            textoPlaceholder='Insira o seu primeiro nome:'
+                                            estilos="w-100 my-2 border-0 py-2"
+                                            valor={field.value}
+                                            mudancaDeValor={field.onChange}
+                                        />
+                                    )}
+                                    rules={{ required: 'O primeiro nome é obrigatório' }}
                                 />
-                                <EntradaDeTexto
-                                    label="Informe o seu último nome: "
-                                    id="ultimoNome"
-                                    tipoDeTexto="text"
-                                    textoPlaceholder='Insira o seu último nome:'
-                                    estilos="w-100 my-2 border-0 py-2"
-                                    valor={controllerRegistro.sobrenomeUsuario}
-                                    mudancaDeValor={(e) => controllerRegistro.setSobrenomeUsuario(e.target.value)}
+                                {errors.nomeUsuario && <p>{errors.nomeUsuario.message}</p>}
+
+                                <Controller
+                                    name="sobrenomeUsuario"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <EntradaDeTexto
+                                            label="Informe o seu último nome:"
+                                            id="ultimoNome"
+                                            tipoDeTexto="text"
+                                            textoPlaceholder='Insira o seu último nome:'
+                                            estilos="w-100 my-2 border-0 py-2"
+                                            valor={field.value}
+                                            mudancaDeValor={field.onChange}
+                                        />
+                                    )}
+                                    rules={{ required: 'O último nome é obrigatório' }}
                                 />
-                                <EntradaDeTexto
-                                    label="Informe o seu e-mail:"
-                                    id="email"
-                                    tipoDeTexto="e-mail"
-                                    textoPlaceholder='Insira o seu e-mail:'
-                                    estilos="w-100 my-2 border-0 py-2"
-                                    valor={controllerRegistro.emailUsuario}
-                                    mudancaDeValor={(e) => controllerRegistro.setEmailUsuario(e.target.value)}
+                                {errors.sobrenomeUsuario && <p>{errors.sobrenomeUsuario.message}</p>}
+
+                                <Controller
+                                    name="emailUsuario"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <EntradaDeTexto
+                                            label="Informe o seu e-mail:"
+                                            id="email"
+                                            tipoDeTexto="email"
+                                            textoPlaceholder='Insira o seu e-mail:'
+                                            estilos="w-100 my-2 border-0 py-2"
+                                            valor={field.value}
+                                            mudancaDeValor={field.onChange}
+                                        />
+                                    )}
+                                    rules={{ required: 'O e-mail é obrigatório' }}
                                 />
-                                <EntradaDeTexto
-                                    label="Informe a sua senha:"
-                                    id="senha"
-                                    tipoDeTexto="password"
-                                    textoPlaceholder='Crie a sua senha:'
-                                    estilos="w-100 my-2 border-0 py-2"
-                                    valor={controllerRegistro.senhaUsuario}
-                                    mudancaDeValor={(e) => controllerRegistro.setSenhaUsuario(e.target.value)}
+                                {errors.emailUsuario && <p>{errors.emailUsuario.message}</p>}
+
+                                <Controller
+                                    name="senhaUsuario"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <EntradaDeTexto
+                                            label="Informe a sua senha:"
+                                            id="senha"
+                                            tipoDeTexto="password"
+                                            textoPlaceholder='Crie a sua senha:'
+                                            estilos="w-100 my-2 border-0 py-2"
+                                            valor={field.value}
+                                            mudancaDeValor={field.onChange}
+                                        />
+                                    )}
+                                    rules={{ required: 'A senha é obrigatória' }}
                                 />
-                                <button type="submit" className="btn btn-success w-100 mt-3" onClick={handleRegistro}>
+                                {errors.senhaUsuario && <p>{errors.senhaUsuario.message}</p>}
+
+                                <button type="submit" className="btn btn-success w-100 mt-3">
                                     Cadastrar!
                                 </button>
                             </form>
