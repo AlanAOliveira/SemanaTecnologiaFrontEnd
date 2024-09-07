@@ -61,11 +61,11 @@ export class Produto {
             if (tipoProduto) {
                 url = `/nativeCoffe/produto?tipo=${tipoProduto}`
             }
-            
+
             const produtos = await api.get<InterfaceProdutos[]>(url, {
                 headers: { Authorization: `Bearer ${tokenJWT}` },
             });
-            
+
             return produtos.data;
         } catch (error) {
             console.log("Erro ao listar produto: ", JSON.stringify(error));

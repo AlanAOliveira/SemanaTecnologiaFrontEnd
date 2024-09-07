@@ -1,6 +1,6 @@
 enum TipoProduto {
     Café = 'CAFE',
-    Aperitivos = 'APERITIVOS',
+    Aperitivos = 'APERITIVO',
 }
 
 export const opcoesDeTipoDeProduto = Object.keys(TipoProduto).map(key => ({

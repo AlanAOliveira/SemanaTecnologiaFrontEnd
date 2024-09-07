@@ -1,19 +1,19 @@
 import React from 'react';
-import { useVisaoControllerInicio } from '../Inicio/visaoControllerInicio';
+import { useVisaoControllerCafesCadastrados } from '../CafésCadastrados/visaoControllerCafesCadastrados';
 import { Col, Row } from 'react-bootstrap';
 import { CardProduto } from '../../componentes/CardProduto/CardProduto';
 
 
 export const TelaCafesCadastrados: React.FC = () => {
-    const { produtosCadastrados, jsxElement } = useVisaoControllerInicio();
+    const { cafesCadastrados, componenteJSX } = useVisaoControllerCafesCadastrados();
 
     return (
         <main>
             <section>
                 <div className="container-fluid">
                     <Row xs={1} sm={2} md={3} className="g-3 p-4 align-center">
-                        {produtosCadastrados && produtosCadastrados.length > 0 ? (
-                            produtosCadastrados.map((item) => (
+                        {cafesCadastrados && cafesCadastrados.length > 0 ? (
+                            cafesCadastrados.map((item) => (
                                 <Col key={item.chavePrimaria_idProduto} className='d-flex justify-content-center'>
                                     <CardProduto
                                         nomeProduto={item.nomeProduto}
@@ -31,7 +31,7 @@ export const TelaCafesCadastrados: React.FC = () => {
                             <Row className="m-auto h-100">
                                 <Col xs="auto">
                                     <div className="text-center">
-                                        {jsxElement}
+                                        {componenteJSX}
                                     </div>
                                 </Col>
                             </Row>

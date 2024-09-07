@@ -38,19 +38,27 @@ export class visaoModeloProduto {
 
                 if (tipoProduto?.includes("CAFE")) {
                     jsx = (
-                        <section>
+                        <section className="d-flex flex-column">
                             <h2>Não existem cafés cadastrados.</h2>
-                            <div style={{ alignItems: 'center', maxWidth: '400px' }} className="img-fluid">
-                                <img src={imagemCafes} alt="Imagem de café" />
+                            <div style={{ alignItems: 'center' }} className="img-fluid">
+                                <img
+                                    src={imagemCafes}
+                                    alt="Imagem de café"
+                                    className="img-fluid"
+                                />
                             </div>
                         </section>
                     );
                 } else if (tipoProduto?.includes("APERITIVO")) {
                     jsx = (
-                        <section>
+                        <section className="d-flex flex-column">
                             <h2>Não existem aperitivos cadastrados.</h2>
-                            <div style={{ alignItems: 'center', maxWidth: '400px' }} className="img-fluid">
-                                <img src={imagemAperitivos} alt="Imagem de aperitivo" />
+                            <div style={{ alignItems: 'center' }} className="img-fluid">
+                                <img
+                                    src={imagemAperitivos}
+                                    alt="Imagem de aperitivo"
+                                    className="img-fluid"
+                                />
                             </div>
                         </section>
                     );

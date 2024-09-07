@@ -7,17 +7,36 @@ import { useNavigate } from "react-router-dom";
 
 
 export const useVisaoControllerCafesCadastrados = () => {
-    const [produtosCadastrados, setProdutosCadastrados] = useState<InterfaceProdutos[] | false>([]);
-    const [jsxElement, setJsxElement] = useState<JSX.Element | null>(null);
+    const [cafesCadastrados, setCafesCadastrados] = useState<InterfaceProdutos[] | false>([]);
+    const [componenteJSX, setComponenteJSX] = useState<JSX.Element | null>(null);
+
     const { tokenJWT } = useAutenticacao();
     const estaNaTela = useEstaNaTela();
     const objVisaoModeloProdutos = new visaoModeloProduto();
     const navegacao = useNavigate();
 
-    
+    useEffect(() => {
+        const buscaInformacoes = async () => {
+            if (tokenJWT) {
+                try {
+                    const cafesResponse = await objVisaoModeloProdutos.listarProdutos(tokenJWT, "CAFE");
+                    if (cafesResponse !== false) {
+                        setCafesCadastrados(cafesResponse.produtos);
+                        setComponenteJSX(cafesResponse.jsx);
+                    } else {
+                        setCafesCadastrados([]);
+                    }
+                } catch (error) {
+                    console.error('Erro ao buscar produtos:', error);
+                }
+            }
+        };
+
+        buscaInformacoes();
+    }, [estaNaTela, tokenJWT]);
 
     return {
-        produtosCadastrados,
-        jsxElement
+        cafesCadastrados,
+        componenteJSX
     }
 }

@@ -18,8 +18,8 @@ export const useVisaoControllerAperitivosCadastrados = () => {
         const buscaInformacoes = async () => {
             if (tokenJWT) {
                 try {
-
                     const response = await objVisaoModeloProdutos.listarProdutos(tokenJWT, "APERITIVO");
+                    console.log(response)
                     if (response !== false) {
                         setProdutosCadastrados(response.produtos);
                         setJsxElement(response.jsx);
