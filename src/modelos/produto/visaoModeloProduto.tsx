@@ -1,6 +1,10 @@
 import { Produto } from "./modeloProduto";
 import { InterfaceProdutos } from "../../interfaces/interfaceDeProdutos";
 import { InterfaceTokenResponse } from "../../interfaces/interfaceDeUsuario";
+import { ListarProdutoResponse } from "../../interfaces/interfaceDeProdutos";
+import imagemAperitivos from "../../assets/imagemAperitivos.png";
+import imagemCafes from "../../assets/imagemCafes.png";
+import imagemHome from "../../assets/imagemHome.png";
 
 export class visaoModeloProduto {
     private produto: Produto;
@@ -25,7 +29,58 @@ export class visaoModeloProduto {
         return this.produto.listarProdutoPeloID(tokenJWT, idProduto);
     }
 
-    async listarProdutos(tokenJWT: InterfaceTokenResponse, tipoProduto?: string): Promise<InterfaceProdutos[] | false> {
-        return this.produto.listarProduto(tokenJWT, tipoProduto);
+    async listarProdutos(tokenJWT: InterfaceTokenResponse, tipoProduto?: string): Promise<ListarProdutoResponse | false> {
+        const produtos = await this.produto.listarProduto(tokenJWT, tipoProduto);
+
+        if (produtos) {
+            if (produtos.length === 0) {
+                let jsx: JSX.Element | null = null;
+
+                if (tipoProduto === 'CAFE') {
+                    jsx = (
+                        <section>
+                            <h2>Não existem cafés cadastrados.</h2>
+                            <div style={{ alignItems: 'center', maxWidth: '400px' }} className="img-fluid">
+                                <img src={imagemCafes} alt="Imagem de café" />
+                            </div>
+                        </section>
+                    );
+                } else if (tipoProduto === 'APERITIVO') {
+                    jsx = (
+                        <section>
+                            <h2>Não existem aperitivos cadastrados.</h2>
+                            <div style={{ alignItems: 'center', maxWidth: '400px' }} className="img-fluid">
+                                <img src={imagemAperitivos} alt="Imagem de aperitivo" />
+                            </div>
+                        </section>
+                    );
+                } else {
+                    jsx = (
+                        <section className="d-flex flex-column">
+                            <h2>Cadastre novos produtos.</h2>
+                            <div style={{ alignItems: 'center' }}>
+                                <img
+                                    src={imagemHome}
+                                    alt="Imagem de hamburguer"
+                                    className="img-fluid"
+                                />
+                            </div>
+                        </section>
+                    );
+                }
+                return {
+                    jsx: jsx,
+                    produtos: [],
+                };
+            } else {
+                return {
+                    jsx: null,
+                    produtos: produtos,
+                };
+            }
+
+        } else {
+            return false;
+        }
     }
 }

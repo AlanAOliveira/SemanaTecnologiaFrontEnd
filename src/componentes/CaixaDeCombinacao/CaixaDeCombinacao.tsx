@@ -1,10 +1,11 @@
 import React from 'react';
+import { tipoSelecaoComboBox } from '../../Type/tipoSelecaoComboBox';
 
 interface caixaDeCombinacaoProps {
     id: string;
     label: string;
     placeholder: string;
-    opcoes: string[];
+    opcoes: tipoSelecaoComboBox;
     estilos: string;
     valorSelecionado?: string;
     aoMudar?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -24,8 +25,8 @@ export const CaixaDeCombinacao: React.FC<caixaDeCombinacaoProps> = (props) => {
             >
                 <option value="" disabled>{props.placeholder}</option>
                 {props.opcoes.map((opcao, index) => (
-                    <option key={index} value={opcao}>
-                        {opcao}
+                    <option key={index} value={opcao.value}>
+                        {opcao.label}
                     </option>
                 ))}
             </select>

@@ -8,7 +8,7 @@ export const TelaLogin: React.FC = () => {
         emailUsuario,
         setEmailUsuario,
         senhaUsuario,
-        setSenhaUsuario, vaiParaRegistro} = useVisaoControllerLogin();
+        setSenhaUsuario, vaiParaRegistro } = useVisaoControllerLogin();
 
     const handleRealizaLogin = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -24,6 +24,8 @@ export const TelaLogin: React.FC = () => {
                             <h1 className="card-title text-center">Bem-vindo.</h1>
                             <form>
                                 <EntradaDeTexto
+                                    label="Informe o seu e-mail:"
+                                    id="email"
                                     tipoDeTexto="email"
                                     textoPlaceholder='Insira seu e-mail:'
                                     estilos="w-100 my-2 border-0 py-2"
@@ -31,6 +33,8 @@ export const TelaLogin: React.FC = () => {
                                     mudancaDeValor={(e) => setEmailUsuario(e.target.value)}
                                 />
                                 <EntradaDeTexto
+                                    label="Informe a sua senha:"
+                                    id="senha"
                                     tipoDeTexto="password"
                                     textoPlaceholder='Insira sua senha:'
                                     estilos="w-100 my-2 border-0 py-2"

@@ -4,6 +4,7 @@ import { InterfaceProdutos } from "../../interfaces/interfaceDeProdutos";
 
 interface InterfaceProdutoAcoes extends InterfaceProdutos {
     acaoDeletar: (id: number) => void;
+    vaiParaTelaDeEdicao: (objProdutoSelecionado: InterfaceProdutos) => void;
 }
 
 export const CardProduto: React.FC<InterfaceProdutoAcoes> = (props) => {
@@ -23,7 +24,7 @@ export const CardProduto: React.FC<InterfaceProdutoAcoes> = (props) => {
                 </Card.Text>
                 <div className='d-flex flex-column gap-2'>
                     <p className='fw-bold text-center h4'>{precoFormatado}</p>
-                    <Button variant="primary">Ver produto</Button>
+                    <Button variant="primary" onClick={() => { if (props) { props.vaiParaTelaDeEdicao(props) } }}>Ver produto</Button>
                     <Button variant="danger" onClick={() => { if (props.chavePrimaria_idProduto) { props.acaoDeletar(props.chavePrimaria_idProduto) } }}>Deletar</Button>
                 </div>
             </Card.Body>

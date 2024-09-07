@@ -25,6 +25,8 @@ export const TelaRegistro: React.FC = () => {
                             <h1 className="card-title text-center">Bem-vindo ao Native Coffee.</h1>
                             <form>
                                 <EntradaDeTexto
+                                    label="Informe o seu primeiro nome:"
+                                    id="primeiroNome"
                                     tipoDeTexto="text"
                                     textoPlaceholder='Insira o seu primeiro nome:'
                                     estilos="w-100 my-2 border-0 py-2"
@@ -32,6 +34,8 @@ export const TelaRegistro: React.FC = () => {
                                     mudancaDeValor={(e) => controllerRegistro.setNomeUsuario(e.target.value)}
                                 />
                                 <EntradaDeTexto
+                                    label="Informe o seu último nome: "
+                                    id="ultimoNome"
                                     tipoDeTexto="text"
                                     textoPlaceholder='Insira o seu último nome:'
                                     estilos="w-100 my-2 border-0 py-2"
@@ -39,6 +43,8 @@ export const TelaRegistro: React.FC = () => {
                                     mudancaDeValor={(e) => controllerRegistro.setSobrenomeUsuario(e.target.value)}
                                 />
                                 <EntradaDeTexto
+                                    label="Informe o seu e-mail:"
+                                    id="email"
                                     tipoDeTexto="e-mail"
                                     textoPlaceholder='Insira o seu e-mail:'
                                     estilos="w-100 my-2 border-0 py-2"
@@ -46,6 +52,8 @@ export const TelaRegistro: React.FC = () => {
                                     mudancaDeValor={(e) => controllerRegistro.setEmailUsuario(e.target.value)}
                                 />
                                 <EntradaDeTexto
+                                    label="Informe a sua senha:"
+                                    id="senha"
                                     tipoDeTexto="password"
                                     textoPlaceholder='Crie a sua senha:'
                                     estilos="w-100 my-2 border-0 py-2"

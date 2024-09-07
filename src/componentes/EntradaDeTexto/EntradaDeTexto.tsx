@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 interface entradaDeTextoProps {
     valor?: string;
@@ -6,20 +6,26 @@ interface entradaDeTextoProps {
     tipoDeTexto: string;
     textoPlaceholder: string;
     estilos: string;
+    label: string;
+    id: string;
+    onBlur?: () => void;
 }
 
-export const EntradaDeTexto: React.FC<entradaDeTextoProps> = (props) => {
-    return (
-        <>
-            <div>
+export const EntradaDeTexto = forwardRef<HTMLInputElement, entradaDeTextoProps>(
+    ({ tipoDeTexto, textoPlaceholder, estilos, valor, mudancaDeValor, onBlur, label, id }, ref) => {
+        return (
+            <>
+                <label htmlFor={id}>{label}</label>
                 <input
-                    type={props.tipoDeTexto}
-                    placeholder={props.textoPlaceholder}
-                    className={props.estilos}
-                    value={props.valor}
-                    onChange={props.mudancaDeValor}
+                    type={tipoDeTexto}
+                    placeholder={textoPlaceholder}
+                    className={estilos}
+                    value={valor}
+                    onChange={mudancaDeValor}
+                    onBlur={onBlur}
+                    ref={ref}
                 />
-            </div>
-        </>
-    );
-}
+            </>
+        );
+    }
+);

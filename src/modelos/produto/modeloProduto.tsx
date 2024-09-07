@@ -57,7 +57,12 @@ export class Produto {
 
     async listarProduto(tokenJWT: InterfaceTokenResponse, tipoProduto?: String): Promise<InterfaceProdutos[] | false> {
         try {
-            const produtos = await api.get<InterfaceProdutos[]>(`/nativeCoffe/produto?tipo=${tipoProduto}`, {
+            let url = "/nativeCoffe/produto";
+            if (tipoProduto) {
+                url = `/nativeCoffe/produto?tipo=${tipoProduto}`
+            }
+            
+            const produtos = await api.get<InterfaceProdutos[]>(url, {
                 headers: { Authorization: `Bearer ${tokenJWT}` },
             });
 

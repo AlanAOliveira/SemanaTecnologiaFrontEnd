@@ -8,3 +8,8 @@ export interface InterfaceProdutos {
     tipoProduto: string;
     urlImagemProduto: string;
 }
+
+export interface ListarProdutoResponse {
+    jsx: JSX.Element | null;
+    produtos: InterfaceProdutos[];
+}
