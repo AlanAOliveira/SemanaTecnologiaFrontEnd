@@ -3,8 +3,8 @@ import Card from 'react-bootstrap/Card';
 import { InterfaceProdutos } from "../../interfaces/interfaceDeProdutos";
 
 interface InterfaceProdutoAcoes extends InterfaceProdutos {
-    acaoDeletar: (id: number) => void;
-    vaiParaTelaDeEdicao: (objProdutoSelecionado: InterfaceProdutos) => void;
+    acaoDeletar?: (id: number) => void;
+    vaiParaTelaDeEdicao?: (objProdutoSelecionado: InterfaceProdutos) => void;
 }
 
 export const CardProduto: React.FC<InterfaceProdutoAcoes> = (props) => {
@@ -24,8 +24,8 @@ export const CardProduto: React.FC<InterfaceProdutoAcoes> = (props) => {
                 </Card.Text>
                 <div className='d-flex flex-column gap-2'>
                     <p className='fw-bold text-center h4'>{precoFormatado}</p>
-                    <Button variant="primary" onClick={() => { if (props) { props.vaiParaTelaDeEdicao(props) } }}>Ver produto</Button>
-                    <Button variant="danger" onClick={() => { if (props.chavePrimaria_idProduto) { props.acaoDeletar(props.chavePrimaria_idProduto) } }}>Deletar</Button>
+                    <Button variant="primary" onClick={() => { if (props.vaiParaTelaDeEdicao) { props.vaiParaTelaDeEdicao(props) } }}>Ver produto</Button>
+                    <Button variant="danger" onClick={() => { if (props.chavePrimaria_idProduto && props.acaoDeletar) { props.acaoDeletar(props.chavePrimaria_idProduto) } }}>Deletar</Button>
                 </div>
             </Card.Body>
         </Card>

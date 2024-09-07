@@ -36,7 +36,7 @@ export class visaoModeloProduto {
             if (produtos.length === 0) {
                 let jsx: JSX.Element | null = null;
 
-                if (tipoProduto === 'CAFE') {
+                if (tipoProduto?.includes("CAFE")) {
                     jsx = (
                         <section>
                             <h2>Não existem cafés cadastrados.</h2>
@@ -45,7 +45,7 @@ export class visaoModeloProduto {
                             </div>
                         </section>
                     );
-                } else if (tipoProduto === 'APERITIVO') {
+                } else if (tipoProduto?.includes("APERITIVO")) {
                     jsx = (
                         <section>
                             <h2>Não existem aperitivos cadastrados.</h2>
