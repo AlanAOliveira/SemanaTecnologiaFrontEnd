@@ -3,8 +3,9 @@ import { Controller } from "react-hook-form";
 import { CaixaDeCombinacao } from "../CaixaDeCombinacao/CaixaDeCombinacao";
 import { AreaDeTexto } from "../AreaDeTexto/AreaDeTexto";
 import { EntradaDeTexto } from "../EntradaDeTexto/EntradaDeTexto";
-import { tipoSelecaoComboBox } from "../../Type/tipoSelecaoComboBox";
+import { tipoSelecaoComboBox } from "../../type/tipoSelecaoComboBox";
 import { InterfaceFormularioDeCadastroDeProdutos } from "../../interfaces/interfaceDeRegistros";
+import { useDesign } from "../../contexts/useDesign";
 
 interface FormularioCadastroProdutoProps {
     onSubmit: (dados: any) => void;
@@ -25,13 +26,15 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
     ehEdicao,
     valoresDosInputsIniciais
 }) => {
+    const { paletaCores } = useDesign();
+
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
             <div className="row justify-content-center w-100 mb-5">
                 <div className="col-md-6">
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="card-title text-center">
+                            <h2 className="card-title text-center" style={{ color: paletaCores.marromTerciario }}>
                                 {ehEdicao ? 'Edite o produto' : 'Registre novos produtos.'}
                             </h2>
                             <form id="formularioCadastro" onSubmit={onSubmit}>
@@ -46,7 +49,7 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                             valor={value}
                                             tipoDeTexto="text"
                                             textoPlaceholder="Nome do produto:"
-                                            estilos="w-100 my-2 border-0 py-2 g-4"
+                                            estilos="w-100 my-2 py-2 g-4"
                                             mudancaDeValor={(e) => onChange(e.target.value)}
                                         />
                                     )}
@@ -56,7 +59,7 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                 <Controller
                                     name="precoProduto"
                                     control={control}
-                                    defaultValue={ehEdicao ? valoresDosInputsIniciais.precoProduto : ""}
+                                    defaultValue={ehEdicao ? parseFloat(valoresDosInputsIniciais.precoProduto).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) : ""}
                                     render={({ field: { value, onChange } }) => (
                                         <EntradaDeTexto
                                             label="Preço do produto"
@@ -64,8 +67,19 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                             valor={value}
                                             tipoDeTexto="text"
                                             textoPlaceholder="Preço do produto:"
-                                            estilos="w-100 my-2 border-0 py-2 g-4"
-                                            mudancaDeValor={(e) => onChange(e.target.value)}
+                                            estilos="w-100 my-2 py-2 g-4"
+                                            mudancaDeValor={(e) => {
+                                                let valor = e.target.value;
+                                                valor = valor.replace(/[^0-9,.]/g, "");
+                                                const valorNumerico = parseFloat(valor.replace(",", "."));
+                                                const valorFormatado = isNaN(valorNumerico)
+                                                    ? ""
+                                                    : new Intl.NumberFormat("pt-BR", {
+                                                        style: "currency",
+                                                        currency: "BRL",
+                                                    }).format(valorNumerico);
+                                                onChange(valorFormatado);
+                                            }}
                                         />
                                     )}
                                 />
@@ -80,10 +94,16 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                             label="Quantidade de produto"
                                             id="qtdeProduto"
                                             valor={value}
-                                            tipoDeTexto="text"
+                                            tipoDeTexto="number"
                                             textoPlaceholder="Quantidade solicitada:"
-                                            estilos="w-100 my-2 border-0 py-2 g-4"
-                                            mudancaDeValor={(e) => onChange(e.target.value)}
+                                            estilos="w-100 my-2 py-2 g-4"
+                                            mudancaDeValor={(e) => {
+                                                const valor = Number(e.target.value);
+                                                if (!isNaN(valor) && Number.isInteger(valor) && valor >= 0) {
+                                                    onChange(valor);
+                                                }
+                                            }}
+
                                         />
                                     )}
                                 />
@@ -100,7 +120,7 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                             valor={value}
                                             tipoDeTexto="text"
                                             textoPlaceholder="URL da imagem:"
-                                            estilos="w-100 my-2 border-0 py-2 g-4"
+                                            estilos="w-100 my-2 py-2 g-4"
                                             mudancaDeValor={(e) => onChange(e.target.value)}
                                         />
                                     )}
@@ -119,7 +139,7 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                             label="Tipo de produto:"
                                             opcoes={opcoesDeTipoProduto}
                                             id="tipoProduto"
-                                            estilos="w-100 my-2 border-0 py-2 g-4"
+                                            estilos="w-100 my-2 py-2 g-4"
                                         />
                                     )}
                                 />
@@ -137,7 +157,7 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                             label="Tamanho:"
                                             opcoes={opcoesDeTamanhoProduto}
                                             id="tamanhoProduto"
-                                            estilos="w-100 my-2 border-0 py-2 g-4"
+                                            estilos="w-100 my-2 py-2 g-4"
                                         />
                                     )}
                                 />
@@ -154,14 +174,14 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                             valor={value}
                                             textoPlaceholder="Descrição do produto"
                                             tipoDeTexto="text"
-                                            estilos="w-100 my-2 border-0 py-2 g-4"
+                                            estilos="w-100 my-2 py-2 g-4"
                                             mudancaDeValor={(e) => onChange(e.target.value)}
                                         />
                                     )}
                                 />
                                 {errors.descricaoProduto && <p>{errors.descricaoProduto.message}</p>}
 
-                                <button type="submit" className="btn btn-success w-100 mt-3">
+                                <button type="submit" className="btn w-100 mt-3" style={{ backgroundColor: paletaCores.marromTerciario, color: paletaCores.corFontePrimaria }}>
                                     {ehEdicao ? 'Atualizar produto' : 'Cadastrar produto'}
                                 </button>
                             </form>

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { opcoesDeTamanhoProduto } from "../../Enum/EnumTamanhoProduto";
 import { opcoesDeTipoDeProduto } from "../../Enum/EnumTipoProduto";
-import { tipoSelecaoComboBox } from '../../Type/tipoSelecaoComboBox';
+import { tipoSelecaoComboBox } from '../../type/tipoSelecaoComboBox';
 import { useForm } from "react-hook-form";
 import { visaoModeloProduto } from "../../modelos/produto/visaoModeloProduto";
 import { useAutenticacao } from "../../contexts/useAutenticacao";
@@ -20,17 +20,30 @@ export const useVisaoControllerCadastradoDeProdutos = () => {
         formulario?.reset();
     };
 
-    const cadastrarNovoProduto = async (dadosFormulario: InterfaceFormularioDeCadastroDeProdutos) => {
-        const objVisaoModeloProduto = new visaoModeloProduto();
-        const validacaoDeDados = {
+    const processarDadosProduto = (dadosFormulario: InterfaceFormularioDeCadastroDeProdutos) => {
+        let { precoProduto } = dadosFormulario;
+        if (precoProduto) {
+            precoProduto = precoProduto
+                .replace('R$', '')
+                .replace('.', '')
+                .replace(',', '.')
+                .trim();
+        }
+    
+        return {
             nomeProduto: dadosFormulario.nomeProduto || '',
-            precoProduto: dadosFormulario.precoProduto ? parseFloat(dadosFormulario.precoProduto) : 0,
+            precoProduto: precoProduto ? parseFloat(precoProduto) : 0,
             quantidadeProduto: dadosFormulario.quantidadeProduto ? parseInt(dadosFormulario.quantidadeProduto, 10) : 0,
             urlImagemProduto: dadosFormulario.urlImagemProduto || '',
             tipoProduto: dadosFormulario.tipoProduto || (opcoesDeTipoProduto.length > 0 ? opcoesDeTipoProduto[0].value : ''),
             tamanhoProduto: dadosFormulario.tamanhoProduto || (opcoesDeTamanhoDeProduto.length > 0 ? opcoesDeTamanhoDeProduto[0].value : ''),
             descricaoProduto: dadosFormulario.descricaoProduto || ''
         };
+    };
+
+    const cadastrarNovoProduto = async (dadosFormulario: InterfaceFormularioDeCadastroDeProdutos) => {
+        const objVisaoModeloProduto = new visaoModeloProduto();
+        const validacaoDeDados = processarDadosProduto(dadosFormulario);
 
         if (tokenJWT) {
             const sucessoAoCadastrar = await objVisaoModeloProduto.cadastrarNovoProduto(tokenJWT, validacaoDeDados);
@@ -44,15 +57,7 @@ export const useVisaoControllerCadastradoDeProdutos = () => {
 
     const editarProdutoCadastrado = async (dadosFormulario: InterfaceFormularioDeCadastroDeProdutos, idProduto: number) => {
         const objVisaoModeloProduto = new visaoModeloProduto();
-        const validacaoDeDados = {
-            nomeProduto: dadosFormulario.nomeProduto || '',
-            precoProduto: dadosFormulario.precoProduto ? parseFloat(dadosFormulario.precoProduto) : 0,
-            quantidadeProduto: dadosFormulario.quantidadeProduto ? parseInt(dadosFormulario.quantidadeProduto, 10) : 0,
-            urlImagemProduto: dadosFormulario.urlImagemProduto || '',
-            tipoProduto: dadosFormulario.tipoProduto || (opcoesDeTipoProduto.length > 0 ? opcoesDeTipoProduto[0].value : ''),
-            tamanhoProduto: dadosFormulario.tamanhoProduto || (opcoesDeTamanhoDeProduto.length > 0 ? opcoesDeTamanhoDeProduto[0].value : ''),
-            descricaoProduto: dadosFormulario.descricaoProduto || ''
-        };
+        const validacaoDeDados = processarDadosProduto(dadosFormulario);
 
         if (tokenJWT) {
             if (idProduto) {

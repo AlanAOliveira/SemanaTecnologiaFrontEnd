@@ -1,5 +1,6 @@
 import React from 'react';
-import { tipoSelecaoComboBox } from '../../Type/tipoSelecaoComboBox';
+import { tipoSelecaoComboBox } from '../../type/tipoSelecaoComboBox';
+import { useDesign } from '../../contexts/useDesign';
 
 interface caixaDeCombinacaoProps {
     id: string;
@@ -12,7 +13,8 @@ interface caixaDeCombinacaoProps {
 }
 
 export const CaixaDeCombinacao: React.FC<caixaDeCombinacaoProps> = (props) => {
-
+    const {paletaCores} = useDesign();
+    
     return (
         <div className='d-flex flex-column'>
             <label htmlFor={props.id}>{props.label}</label>
@@ -22,6 +24,7 @@ export const CaixaDeCombinacao: React.FC<caixaDeCombinacaoProps> = (props) => {
                 value={props.valorSelecionado}
                 onChange={props.aoMudar}
                 className={props.estilos}
+                style={{border: `2px solid ${paletaCores.marromTerciario}`, borderRadius: 5, padding: 5 }}
             >
                 <option value="" disabled>{props.placeholder}</option>
                 {props.opcoes.map((opcao, index) => (

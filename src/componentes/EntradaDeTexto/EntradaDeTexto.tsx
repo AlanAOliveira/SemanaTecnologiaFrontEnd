@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { useDesign } from '../../contexts/useDesign';
 
 interface entradaDeTextoProps {
     valor?: string;
@@ -13,6 +14,7 @@ interface entradaDeTextoProps {
 
 export const EntradaDeTexto = forwardRef<HTMLInputElement, entradaDeTextoProps>(
     ({ tipoDeTexto, textoPlaceholder, estilos, valor, mudancaDeValor, onBlur, label, id }, ref) => {
+        const {paletaCores} = useDesign();
         return (
             <>
                 <label htmlFor={id}>{label}</label>
@@ -24,6 +26,7 @@ export const EntradaDeTexto = forwardRef<HTMLInputElement, entradaDeTextoProps>(
                     onChange={mudancaDeValor}
                     onBlur={onBlur}
                     ref={ref}
+                    style={{ border: `2px solid ${paletaCores.marromTerciario}`, borderRadius: 5, padding: 5 }}
                 />
             </>
         );
