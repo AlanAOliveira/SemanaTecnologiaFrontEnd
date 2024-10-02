@@ -3,10 +3,9 @@ import { Col, Row } from 'react-bootstrap';
 import { CardProduto } from '../../componentes/CardProduto/CardProduto';
 import { useVisaoControllerAperitivosCadastrados } from './visaoControllerAperitivosCadastrados';
 
-
 export const TelaAperitivosCadastrados: React.FC = () => {
-    const { aperitivosCadastrados, jsxElement } = useVisaoControllerAperitivosCadastrados();
-    
+    const { aperitivosCadastrados, jsxElement, deletarAperitivo, vaiParaTelaDeEdicaoProduto } = useVisaoControllerAperitivosCadastrados();
+
     return (
         <main>
             <section>
@@ -23,6 +22,8 @@ export const TelaAperitivosCadastrados: React.FC = () => {
                                         quantidadeProduto={item.quantidadeProduto}
                                         tamanhoProduto={item.tamanhoProduto}
                                         tipoProduto={item.tipoProduto}
+                                        acaoDeletar={() => deletarAperitivo(item.chavePrimaria_idProduto!)}
+                                        vaiParaTelaDeEdicao={() => vaiParaTelaDeEdicaoProduto(item)}
                                         chavePrimaria_idProduto={item.chavePrimaria_idProduto}
                                     />
                                 </Col>

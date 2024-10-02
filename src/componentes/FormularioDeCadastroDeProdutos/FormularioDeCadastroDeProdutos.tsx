@@ -29,7 +29,7 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
     const { paletaCores } = useDesign();
 
     return (
-        <div className="container vh-100 d-flex justify-content-center align-items-center">
+        <div className="container vh-80 d-flex justify-content-center align-items-center mt-3">
             <div className="row justify-content-center w-100 mb-5">
                 <div className="col-md-6">
                     <div className="card">
@@ -130,7 +130,7 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                 <Controller
                                     name="tipoProduto"
                                     control={control}
-                                    defaultValue={ehEdicao ? valoresDosInputsIniciais.urlImagemProduto || "" : ""}
+                                    defaultValue={ehEdicao ? valoresDosInputsIniciais.tipoProduto || "" : ""}
                                     render={({ field: { value, onChange } }) => (
                                         <CaixaDeCombinacao
                                             valorSelecionado={value}
@@ -148,7 +148,7 @@ export const FormularioCadastroProduto: React.FC<FormularioCadastroProdutoProps>
                                 <Controller
                                     name="tamanhoProduto"
                                     control={control}
-                                    defaultValue={ehEdicao ? valoresDosInputsIniciais.urlImagemProduto || "" : ""}
+                                    defaultValue={ehEdicao ? valoresDosInputsIniciais.tamanhoProduto || "" : ""}
                                     render={({ field: { value, onChange } }) => (
                                         <CaixaDeCombinacao
                                             valorSelecionado={value}

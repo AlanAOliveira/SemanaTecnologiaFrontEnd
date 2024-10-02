@@ -25,18 +25,16 @@ export const TelaCadastroDeProduto: React.FC = () => {
     };
 
     return (
-        <main>
-            <section>
-                <FormularioCadastroProduto
-                    onSubmit={handleSubmit(handleFormSubmit)}
-                    valoresDosInputsIniciais={state?.ehEdicao ? state?.editarObjeto : null}
-                    opcoesDeTamanhoProduto={opcoesDeTamanhoDeProduto}
-                    opcoesDeTipoProduto={opcoesDeTipoProduto}
-                    control={control}
-                    errors={errors}
-                    ehEdicao={state?.ehEdicao}
-                />
-            </section>
-        </main>
+        <section>
+            <FormularioCadastroProduto
+                onSubmit={handleSubmit(handleFormSubmit)}
+                valoresDosInputsIniciais={state?.ehEdicao ? state?.editarObjeto : null}
+                opcoesDeTamanhoProduto={opcoesDeTamanhoDeProduto}
+                opcoesDeTipoProduto={opcoesDeTipoProduto}
+                control={control}
+                errors={errors}
+                ehEdicao={state?.ehEdicao}
+            />
+        </section>
     );
 }

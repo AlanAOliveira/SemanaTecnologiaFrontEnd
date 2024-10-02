@@ -1,7 +1,7 @@
 enum TamanhoProduto {
-    Pequeno = 'PEQUENO',
-    Médio = 'MEDIO',
-    Grande = 'GRANDE',
+    PEQUENO = 'PEQUENO',
+    MEDIO = 'MEDIO',
+    GRANDE = 'GRANDE',
 }
 
 export const opcoesDeTamanhoProduto = Object.keys(TamanhoProduto).map(key => ({

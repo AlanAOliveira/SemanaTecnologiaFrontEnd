@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useVisaoControllerInicio = () => {
     const [produtosCadastrados, setProdutosCadastrados] = useState<InterfaceProdutos[] | false>([]);
-    const [jsxElement, setJsxElement] = useState<JSX.Element | null>(null); // Novo estado para JSX
+    const [jsxElement, setJsxElement] = useState<JSX.Element | null>(null);
 
     const { tokenJWT } = useAutenticacao();
     const estaNaTela = useEstaNaTela();
@@ -15,24 +15,24 @@ export const useVisaoControllerInicio = () => {
     const navegacao = useNavigate();
 
     useEffect(() => {
-        const buscaInformacoes = async () => {
-            if (tokenJWT) {
-                try {
-                    const response = await objVisaoModeloProdutos.listarProdutos(tokenJWT);
-                    if (response !== false) {
-                        setProdutosCadastrados(response.produtos); // Defina os produtos
-                        setJsxElement(response.jsx); // Defina o JSX para exibição
-                      } else {
-                        setProdutosCadastrados([]); // Array vazio se não houver produtos
-                      }
-                } catch (error) {
-                    console.error('Erro ao buscar produtos:', error);
-                }
-            }
-        };
-
         buscaInformacoes();
     }, [estaNaTela, tokenJWT]);
+
+    const buscaInformacoes = async () => {
+        if (tokenJWT) {
+            try {
+                const response = await objVisaoModeloProdutos.listarProdutos(tokenJWT);
+                if (response !== false) {
+                    setProdutosCadastrados(response.produtos);
+                    setJsxElement(response.jsx);
+                } else {
+                    setProdutosCadastrados([]);
+                }
+            } catch (error) {
+                console.error('Erro ao buscar produtos:', error);
+            }
+        }
+    };
 
     const deletarProduto = async (id: number) => {
         if (tokenJWT) {
@@ -41,6 +41,7 @@ export const useVisaoControllerInicio = () => {
                     if (produtosDoEstado === false) {
                         return false;
                     }
+                    buscaInformacoes();
                     return produtosDoEstado.filter(produto => produto.chavePrimaria_idProduto !== id);
                 });
             }
