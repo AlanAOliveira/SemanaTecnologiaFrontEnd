@@ -4,7 +4,7 @@ import { useAutenticacao } from "../../contexts/useAutenticacao";
 import { useEstaNaTela } from "../../hook/useEstaNaTela";
 import { visaoModeloProduto } from "../../modelos/produto/visaoModeloProduto";
 import { useNavigate } from "react-router-dom";
-import { TipoProduto } from '../../Enum/EnumTipoProduto';
+import { TipoProduto } from '../../enum/EnumTipoProduto';
 
 export const useVisaoControllerCafesCadastrados = () => {
     const [cafesCadastrados, setCafesCadastrados] = useState<InterfaceProdutos[] | false>([]);

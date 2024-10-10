@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { opcoesDeTamanhoProduto } from "../../Enum/EnumTamanhoProduto";
-import { opcoesDeTipoDeProduto } from "../../Enum/EnumTipoProduto";
+import { opcoesDeTamanhoProduto } from "../../enum/EnumTamanhoProduto";
+import { opcoesDeTipoDeProduto } from "../../enum/EnumTipoProduto";
 import { tipoSelecaoComboBox } from '../../type/tipoSelecaoComboBox';
 import { useForm } from "react-hook-form";
 import { visaoModeloProduto } from "../../modelos/produto/visaoModeloProduto";

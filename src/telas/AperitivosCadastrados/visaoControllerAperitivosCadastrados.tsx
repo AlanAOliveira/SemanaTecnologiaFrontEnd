@@ -4,7 +4,7 @@ import { useEstaNaTela } from "../../hook/useEstaNaTela";
 import { visaoModeloProduto } from "../../modelos/produto/visaoModeloProduto";
 import { useEffect, useState } from "react";
 import { InterfaceProdutos } from "../../interfaces/interfaceDeProdutos";
-import { TipoProduto } from '../../Enum/EnumTipoProduto';
+import { TipoProduto } from '../../enum/EnumTipoProduto';
 
 export const useVisaoControllerAperitivosCadastrados = () => {
     const [aperitivosCadastrados, setAperitivosCadastrados] = useState<InterfaceProdutos[] | false>([]);
