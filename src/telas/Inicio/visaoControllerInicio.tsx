@@ -19,44 +19,15 @@ export const useVisaoControllerInicio = () => {
     }, [estaNaTela, tokenJWT]);
 
     const buscaInformacoes = async () => {
-        if (tokenJWT) {
-            try {
-                const response = await objVisaoModeloProdutos.listarProdutos(tokenJWT);
-                if (response !== false) {
-                    setProdutosCadastrados(response.produtos);
-                    setJsxElement(response.jsx);
-                } else {
-                    setProdutosCadastrados([]);
-                }
-            } catch (error) {
-                console.error('Erro ao buscar produtos:', error);
-            }
-        }
+        
     };
 
     const deletarProduto = async (id: number) => {
-        if (tokenJWT) {
-            if (await objVisaoModeloProdutos.deletarProduto(tokenJWT, id)) {
-                setProdutosCadastrados(produtosDoEstado => {
-                    if (produtosDoEstado === false) {
-                        return false;
-                    }
-                    buscaInformacoes();
-                    return produtosDoEstado.filter(produto => produto.chavePrimaria_idProduto !== id);
-                });
-            }
-        };
+        
     }
 
     const vaiParaTelaDeCadastroProdutoEdicao = async (objetoParaEdicao: InterfaceProdutos) => {
-        if (tokenJWT) {
-            if (objetoParaEdicao.chavePrimaria_idProduto) {
-                const produtoSelecionado = await objVisaoModeloProdutos.listarProdutoPeloID(tokenJWT, objetoParaEdicao.chavePrimaria_idProduto);
-                navegacao('/cadastroDeProduto', {
-                    state: { ehEdicao: true, editarObjeto: produtoSelecionado }
-                });
-            }
-        }
+        
     }
 
     return {
